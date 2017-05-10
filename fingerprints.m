@@ -16,7 +16,7 @@ y = resample(y, fsn, fs);
 [s,f,t] = spectrogram(y, 128, 64, [], fsn);
 mag = abs(s);
 
-% Calculate max frequencies of each time index.
+% Calculate max frequencies of each time index & output indexes for hash.
 [maxpeak,maxind] = max(mag);
 peaks = maxind;
 
