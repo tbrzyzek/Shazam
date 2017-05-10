@@ -17,6 +17,7 @@ y = resample(y, fsn, fs);
 mag = abs(s);
 
 % Calculate max frequencies of each time index.
-[peaks,peaki] = max(mag);
+[maxpeak,maxind] = max(mag);
+peaks = maxind;
 
 end
