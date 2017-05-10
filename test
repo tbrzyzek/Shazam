@@ -1,0 +1,43 @@
+clear all; close all; clc;
+
+songList = dir('songs');
+numberofSongs = numel(songList)-2;
+songTitle = [];
+for k = 1:numberofSongs
+    information = songList(k+2);
+    songTitle{k} = information.name;
+end
+songTitle = songTitle';
+
+prompt = msgbox('Creating Hash Table');
+hash_table = createHash(200,songTitle);
+close(prompt);
+
+%%
+prompt = msgbox('Reading Song');
+[y,fs] = audioread('songs\Undertale_OST_-_Undertale.wav');
+
+y = y(:,1);
+
+start = randi([0 floor(length(y)/fs)-10],1,1);
+stop = start+10;
+y = y(fs*start+1:1:fs*stop);
+
+Y = fft(y);
+y = abs(Y);
+[~,maxf] = max(Y);
+close(prompt);
+
+
+%%
+prompt = msgbox('Looking for Match');
+matchID = match_segment(y,fs,hash_table,numberofSongs)
+close(prompt);
+
+
+
+
+
+
+
+
